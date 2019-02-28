@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Agora.io, Inc.
+// Copyright (c) 2019 Hawtian.Wang (twistoy.wang@gmail.com)
 //
 
 #pragma once  // NOLINT(build/header_guard)
