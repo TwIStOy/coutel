@@ -5,42 +5,38 @@
 
 #include <cstdint>
 #include <iostream>
+#include <optional>
 #include <sstream>
 #include <string>
+
+#include "khala/base/reflection.hh"
 
 namespace coutel {
 namespace protocol {
 
-class Position {
- public:
-  static Position FromString(const std::string& str);
+struct Position {
+  int32_t line{-1};
+  int32_t column{-1};
 
   Position() = default;
-  Position(int32_t line, uint32_t column);
+  Position(int32_t line, int32_t column);
 
-  bool IsValid() const;
+  static std::optional<Position> FromString(const std::string& str);
   std::string Repr() const;
 
-  friend bool operator==(const Position& lhs, const Position& rhs);
-  friend bool operator<(const Position& lhs, const Position& rhs);
-
- private:
-  int32_t line_{-1};
-  int32_t column_{-1};
+  bool IsValid() const;
 };
 
-Position::Position(int32_t line, uint32_t column)
-    : line_(line), column_(column) {}
+REFLECTION(Position, line, column);
 
-inline bool Position::IsValid() const { return line_ >= 0; }
+inline bool Position::IsValid() const { return line >= 0; }
 
 inline bool operator==(const Position& lhs, const Position& rhs) {
-  return lhs.line_ == rhs.line_ && lhs.column_ == rhs.column_;
+  return lhs.line == rhs.line && lhs.column == rhs.column;
 }
 
 inline bool operator<(const Position& lhs, const Position& rhs) {
-  return lhs.line_ == rhs.line_ ? lhs.column_ < rhs.column_
-                                : lhs.line_ < rhs.line_;
+  return lhs.line == rhs.line ? lhs.column < rhs.column : lhs.line < rhs.line;
 }
 
 inline bool operator<=(const Position& lhs, const Position& rhs) {
@@ -49,7 +45,7 @@ inline bool operator<=(const Position& lhs, const Position& rhs) {
 
 inline std::string Position::Repr() const {
   std::ostringstream os;
-  os << line_ << ":" << column_;
+  os << line << ":" << column;
   return os.str();
 }
 

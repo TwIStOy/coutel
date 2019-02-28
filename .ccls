@@ -6,6 +6,7 @@
 
 -I./src
 -I./third_party/rapidjson/include
+-I./third_party/khala/include
 
 -Wall
 -Wextra
