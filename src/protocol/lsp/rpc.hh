@@ -8,14 +8,15 @@
 #include <variant>
 
 #include "khala/base/reflection.hh"
-#include "rapidjson/document.h"
-#include "rapidjson/rapidjson.h"
+#include "third_party/json.hpp"
 
 #include "protocol/lsp/error_code.hh"
 
 namespace coutel {
 namespace protocol {
 namespace lsp {
+
+using nlohmann::json;
 
 struct Message {
   std::string jsonrpc;
@@ -48,13 +49,13 @@ struct RequestMessage : Message {
   /**
    * The method's params.
    */
-  std::optional<rapidjson::Document> params;
+  std::optional<json> params;
 };
 
 struct ResponseError {
   ErrorCode code;
   std::string message;
-  std::optional<rapidjson::Document> data;
+  std::optional<json> data;
 };
 
 struct ResponseMessageSuccess : Message {
@@ -67,7 +68,7 @@ struct ResponseMessageSuccess : Message {
    * The result of a request. This member is REQUIRED on success.
    * This member MUST NOT exist if there was an error invoking the method.
    */
-  std::variant<std::string, int64_t, bool, rapidjson::Document> result;
+  std::variant<std::string, int64_t, bool, json> result;
 };
 
 struct ResponseMessageError : Message {
@@ -91,7 +92,7 @@ struct NotificationMessage {
   /**
    * The notification's params.
    */
-  rapidjson::Document params;
+  json params;
 };
 
 struct CancelParams {

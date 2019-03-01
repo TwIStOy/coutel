@@ -9,11 +9,12 @@
 #include <unordered_map>
 #include <vector>
 
-#include "rapidjson/document.h"
-
 #include "protocol/lsp/basic.hh"
+#include "third_party/json.hpp"
 
 namespace coutel::protocol::lsp {
+
+using nlohmann::json;
 
 struct Command {
   /**
@@ -29,7 +30,7 @@ struct Command {
    * invoked with.
    * arguments ?: any[];
    */
-  std::optional<std::vector<rapidjson::Document>> arguments;
+  std::optional<std::vector<json>> arguments;
 };
 
 /**
