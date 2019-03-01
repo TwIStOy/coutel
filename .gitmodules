@@ -4,3 +4,9 @@
 [submodule "third_party/khala"]
 	path = third_party/khala
 	url = https://github.com/TwIStOy/khala.git
+[submodule "third_party/uriparser"]
+	path = third_party/uriparser
+	url = https://github.com/uriparser/uriparser.git
+[submodule "third_party/spdlog"]
+	path = third_party/spdlog
+	url = https://github.com/gabime/spdlog.git
