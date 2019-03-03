@@ -9,6 +9,7 @@
 -I./third_party/khala/include
 -I./third_party/uriparser/include
 -I./third_party/spdlog/include
+-I/Users/twistoy/Downloads/clang+llvm-7.0.0-x86_64-apple-darwin/include
 
 -Wall
 -Wextra
