@@ -17,6 +17,13 @@ namespace coutel {
 using nlohmann::json;
 using fmt::operator"" _format;
 
+class MessageCenter;
+
+struct RequestContext {
+  int64_t request_id;
+  MessageCenter* center;
+};
+
 class MessageCenter final : public khala::base::Emitter<MessageCenter> {
  public:
   using MessageHandler = std::function<void(protocol::lsp::RequestMessage&)>;
